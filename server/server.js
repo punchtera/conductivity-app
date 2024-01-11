@@ -62,14 +62,15 @@ function deepFirstSearch(rows, row, col) {
     // Mark the current cell as visited
     rows[row] = rows[row].substring(0, col) + '0' + rows[row].substring(col + 1);
 
+    console.info(`rows: ${rows} - row: ${row} - col: ${col}`);
+
     // If reached the bottom row, return true
     if (row === rows.length - 1) {
         return true;
-    }
-
+    } 
     // Recur in all directions forward directions
     return (
-        // deepFirstSearch(rows, row - 1, col) ||
+        deepFirstSearch(rows, row - 1, col) ||
         deepFirstSearch(rows, row + 1, col) ||
         deepFirstSearch(rows, row, col - 1) ||
         deepFirstSearch(rows, row, col + 1)
@@ -102,18 +103,18 @@ function reconstructPath(rows, row, col) {
         return path;
     }
 
-   // Recur in all four directions and check if any of them returns a non-empty path
-   const upPath = reconstructPath(rows, row - 1, col);
-   if (upPath.length > 0) return path.concat(upPath);
+    // Recur in all four directions and check if any of them returns a non-empty path
+    const upPath = reconstructPath(rows, row - 1, col);
+    if (upPath.length > 0) return path.concat(upPath);
 
-   const downPath = reconstructPath(rows, row + 1, col);
-   if (downPath.length > 0) return path.concat(downPath);
+    const downPath = reconstructPath(rows, row + 1, col);
+    if (downPath.length > 0) return path.concat(downPath);
 
-   const leftPath = reconstructPath(rows, row, col - 1);
-   if (leftPath.length > 0) return path.concat(leftPath);
+    const leftPath = reconstructPath(rows, row, col - 1);
+    if (leftPath.length > 0) return path.concat(leftPath);
 
-   const rightPath = reconstructPath(rows, row, col + 1);
-   if (rightPath.length > 0) return path.concat(rightPath);
+    const rightPath = reconstructPath(rows, row, col + 1);
+    if (rightPath.length > 0) return path.concat(rightPath);
 }
 
 
